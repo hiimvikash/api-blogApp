@@ -14,7 +14,7 @@ const {checkAuthe} = require('./middlewares/checkAuth');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URL);
 
-app.use(cors({origin: 'https://blogefy.netlify.app/', credentials: true }));
+app.use(cors({origin: 'https://blogefy.netlify.app', credentials: true }));
 app.use(express.json())
 app.use(cookieParser());
 app.use(express.static(path.resolve('./public')));

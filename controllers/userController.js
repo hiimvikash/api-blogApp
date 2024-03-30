@@ -1,5 +1,6 @@
 const User = require('../model/userModel');
 const bcrypt = require('bcrypt')
+const {validateToken} = require('../service/authentication');
 
 async function handleUserRegistration(req, res) {
     const {username, password} = req.body;
@@ -41,7 +42,9 @@ async function handleUserLogin(req, res) {
         const token = await User.matchPasswordAndGenerateToken(username, password);
         // If the user is successfully authenticated, set the token
         res.cookie("token", token);
-        res.status(200).json({message : "Succefully loggedin"});
+
+        const info = validateToken(token);
+        res.status(200).json({message : "Succefully loggedin", info });
     } 
     catch (error) {
         res.status(400).json({message : error.message});

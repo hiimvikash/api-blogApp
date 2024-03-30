@@ -41,7 +41,7 @@ async function handleUserLogin(req, res) {
     try {
         const token = await User.matchPasswordAndGenerateToken(username, password);
         // If the user is successfully authenticated, set the token
-        res.cookie("token", token);
+        res.cookie("token", token, { domain: 'blogefy.vercel.app'});
 
         const info = validateToken(token);
         res.status(200).json({message : "Succefully loggedin", info });

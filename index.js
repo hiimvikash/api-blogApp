@@ -14,6 +14,7 @@ const {checkAuthe} = require('./middlewares/checkAuth');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URL);
 
+app.use(checkAuthe)
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "https://blogefy.vercel.app");
     res.setHeader("Access-Control-Allow-Credentials", "true");
@@ -39,7 +40,6 @@ app.use(express.json())
 app.use(cookieParser());
 app.use(express.static(path.resolve('./public')));
 
-app.use(checkAuthe)
 
 app.use('/user', userRouter);
 app.use('/blog', blogRouter);

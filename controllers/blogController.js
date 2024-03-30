@@ -2,6 +2,7 @@
 const Blog = require("../model/blogModel");
 const Comment = require("../model/commentModel")
 const fs = require('fs');
+
 async function handleAddBlog(req, res) {
   const { title, summary, content } = req.body;
   // Confirm data

@@ -13,6 +13,7 @@ const {checkAuthe} = require('./middlewares/checkAuth');
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URL);
+app.use(cookieParser());
 
 const corsOptions = {
   origin: ['https://blogefy.vercel.app'],
@@ -21,7 +22,6 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(cookieParser());
 app.use(checkAuthe)
 
 

@@ -14,28 +14,16 @@ const {checkAuthe} = require('./middlewares/checkAuth');
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URL);
 
+const corsOptions = {
+  origin: ['https://blogefy.vercel.app'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+
 app.use(cookieParser());
 app.use(checkAuthe)
-app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://blogefy.vercel.app");
-    res.setHeader("Access-Control-Allow-Credentials", "true");
 
-    res.setHeader(
-      "Access-Control-Allow-Methods",
-      "OPTIONS, GET, POST, PUT, PATCH, DELETE"
-    );
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    if (req.method === "OPTIONS") {
-      return res.sendStatus(200);
-    }
-    next();
-  });
-  const corsOptions = {
-    origin: 'https://blogefy.vercel.app',
-    credentials: true
-  };
-  
-  app.use(cors(corsOptions));
 
 app.use(express.json())
 app.use(express.static(path.resolve('./public')));

@@ -16,6 +16,8 @@ mongoose.connect(process.env.MONGO_URL);
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "https://blogefy.vercel.app");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+
     res.setHeader(
       "Access-Control-Allow-Methods",
       "OPTIONS, GET, POST, PUT, PATCH, DELETE"
@@ -26,9 +28,13 @@ app.use((req, res, next) => {
     }
     next();
   });
-app.use(cors({origin: 'https://blogefy.vercel.app', credentials: true }));
+  const corsOptions = {
+    origin: 'https://blogefy.vercel.app',
+    credentials: true
+  };
+  
+  app.use(cors(corsOptions));
 
-// app.use(cors());
 app.use(express.json())
 app.use(cookieParser());
 app.use(express.static(path.resolve('./public')));

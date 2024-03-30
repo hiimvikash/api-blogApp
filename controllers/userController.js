@@ -45,7 +45,8 @@ async function handleUserLogin(req, res) {
         
 
         const info = validateToken(token);
-        res.status(200).json({message : "Succefully loggedin", info });
+        
+        res.send('');
     } 
     catch (error) {
         res.status(400).json({message : error.message});

@@ -41,12 +41,11 @@ async function handleUserLogin(req, res) {
     try {
         const token = await User.matchPasswordAndGenerateToken(username, password);
         // If the user is successfully authenticated, set the token
-        res.cookie("token", token, { domain: '.blogefy.vercel.app', maxAge: 900000, sameSite:false});
+        res.cookie("token", token, { domain: 'blogefy.vercel.app', maxAge: 900000});
         
 
         const info = validateToken(token);
-        
-        res.send('');
+        res.status(200).json({message : "Succefully loggedin", info });
     } 
     catch (error) {
         res.status(400).json({message : error.message});

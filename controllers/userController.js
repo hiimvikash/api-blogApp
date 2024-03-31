@@ -41,13 +41,10 @@ async function handleUserLogin(req, res) {
     try {
         const token = await User.matchPasswordAndGenerateToken(username, password);
         // If the user is successfully authenticated, set the token
-        // res.cookie("token", token, { sameSite: 'None', secure: true });
-        res.cookie("token", token);
-
         
-
+        // res.cookie("token", token);
         const info = validateToken(token);
-        res.status(200).json({message : "Succefully loggedin", info });
+        res.status(200).json({message : "Succefully loggedin", info, token });
     } 
     catch (error) {
         res.status(400).json({message : error.message});

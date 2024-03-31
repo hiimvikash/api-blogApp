@@ -41,7 +41,10 @@ async function handleUserLogin(req, res) {
     try {
         const token = await User.matchPasswordAndGenerateToken(username, password);
         // If the user is successfully authenticated, set the token
-        res.cookie("token", token, {domain: 'blogefy.onrender.com'});
+        res.cookie("token", token, {domain: 'blogefy.onrender.com', HttpOnly : true,
+        Expires : DateTime.UtcNow.AddDays(7),
+        SameSite : SameSiteMode.None,
+        Secure : true});
         
 
         const info = validateToken(token);

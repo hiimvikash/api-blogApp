@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URL);
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: 'https://blogefy.onrender.com',
+  origin: 'https://blogefy.vercel.app',
   credentials: true
 };
 

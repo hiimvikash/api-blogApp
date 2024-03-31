@@ -56,6 +56,7 @@ async function handleUserVerification(req, res){
     if(req.user === null){
         res.status(401).json({message : "Unauthenticated", info : null});
     }else{
+        res.header('Access-Control-Allow-Credentials', 'true');
         res.status(200).json({message: `Verified as ${req.user?.username}`, info : req.user});
     }
 }
